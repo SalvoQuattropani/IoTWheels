@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "realtimeApp">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>ATST Progetto IoT</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  		<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+	</head>
+	
+	
+	<style type="text/css">
+	
+body { 
+height: 100%; 
+width:100%; 
+margin: 0; 
+padding: 0; 
+overflow:hidden;}
+
+#sfondo {
+position:fixed;
+ top:0; left:0; 
+ width:100%; 
+ height:100%;
+ z-index:-1;
+}
+	
+	#temperatura{
+	position:relative;
+	top:140px;
+	left:240px;
+	}
+	#umidita{
+	position:relative;
+	top:70px;
+	left:640px;
+	}	
+	
+	@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+	#live{
+	position:relative;
+    top:-10px;
+	left:700px;
+	animation: blink 1s;
+    animation-iteration-count: infinite;
+
+	}
+	
+	
+		#accelX{
+	position:relative;
+	top:85px;
+	left:1000px;
+	}	
+	
+		#accelY{
+	position:relative;
+	top:95px;
+	left:1000px;
+	}	
+		#accelZ{
+	position:relative;
+	top:105px;
+	left:1000px;
+	}	
+	
+		#giroX{
+	position:relative;
+	top:590px;
+	left:800px;
+	}	
+	
+	#giroY{
+	position:relative;
+	top:410px;
+	left:1000px;
+	}
+	
+	#giroZ{
+	position:relative;
+	top:540px;
+	left:1130px;
+	}
+	
+	#credits{
+	position:relative;
+	top:540px;
+	left:1280px;
+	}
+	
+	.titolo{
+	position:absolute;
+	top:20px;
+	left:20px;
+	font-size:40px;
+	font-weight:bold;
+	text-decoration:underline;
+	}
+	
+	
+	.uni{
+	position:absolute;
+	top:640px;
+	left:50px;
+     
+
+	}
+	</style>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<body>
+	<script>
+  	var socket = io.connect('http://localhost:8080');
+	
+	socket.on('connect', function () {
+		socket.emit('datarequest');
+	});
+	socket.on('temp', function(temp){
+		$('#temp').html(temp);
+		console.log(data);
+	});
+	
+	
+	
+	socket.on('umid', function(umid){
+		
+		$('#umid').html(umid);
+		console.log(data);
+	});
+	
+	socket.on('accX', function(accX){
+		
+		$('#accX').html(accX);
+		console.log(data);
+	});	
+	
+		socket.on('accY', function(accY){
+		
+		$('#accY').html(accY);
+		console.log(data);
+	});	
+		socket.on('accZ', function(accZ){
+		
+		$('#accZ').html(accZ);
+		console.log(data);
+	});	
+	
+	
+	socket.on('girX', function(girX){
+		
+		$('#girX').html(girX);
+		console.log(data);
+	});
+	socket.on('girY', function(girY){
+		
+		$('#girY').html(girY);
+		console.log(data);
+	});
+	socket.on('girZ', function(girZ){
+		
+		$('#girZ').html(girZ);
+		console.log(data);
+	});
+
+	
+	
+	</script>
+	
+
+	<img src="sfondo.jpg" id="sfondo" />
+	<br>
+	
+	<div id="temperatura">Temperatura:<span id="temp"></div>
+	<div id="umidita">Umidità:<span id="umid"></div>
+	<div id="accelX">Accelerazione X:<span id="accX"></div>
+	<div id="accelY">Accelerazione Y:<span  id="accY"></div>
+	<div id="accelZ">Accelerazione Z:<span  id="accZ"></div>
+	<div id="giroX">Rotazione X:<span  id="girX"></div>
+	<div id="giroY">Rotazione Y:<span  id="girY"></div>
+	<div id="giroZ">Rotazione Z:<span  id="girZ"></div>	
+	<div id="live"><img src="live.png" id="live"></div>	
+	<div id="credits">Developed by Quattropani S. & Modica P.W</div>
+	<div class="titolo">IoTWheels</div>
+    <div class="uni"><img src="uni.png" id="uni"></div>	
+	</body>
+</html>
